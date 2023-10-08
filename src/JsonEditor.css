@@ -1,56 +1,76 @@
 .json-editor {
-    display: flex;
-    height: 100vh;
-    background-color: #002b36;
-    color: #ffffff; /* Changed color to white for better visibility */
-    font-family: 'Courier New', Courier, monospace;
-  }
-  
-  .input-area,
-  .output-area {
-    flex: 1;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .input-area textarea {
-    width: 100%;
-    height: calc(100% - 60px);
-    padding: 10px;
-    box-sizing: border-box;
-    border: 2px solid #586e75;
-    border-radius: 4px;
-    background-color: #073642;
-    color: #ffffff; /* Changed color to white for better visibility */
-    font-size: 16px;
-    resize: none;
-    margin-bottom: 10px;
-  }
-  
-  .output-area {
-    border-left: 2px solid #586e75;
-  }
-  
-  .error {
-    color: #dc322f;
-    background-color: #073642;
-    padding: 10px;
-    border-radius: 4px;
-  }
-  
-  button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #268bd2;
-    color: #fdf6e3; /* Kept the color as-is, but feel free to adjust if needed */
-    font-size: 16px;
-    cursor: pointer;
-    border: 2px solid #586e75;
-  }
-  
-  button:hover {
-    background-color: #2aa198;
-  }
-  
+  display: flex;
+  height: 100vh;
+  background-color: #002b36;
+  color: #ffffff; /* Changed color to white for better visibility */
+  font-family: "Courier New", Courier, monospace;
+}
+
+.input-area,
+.output-area {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.input-area textarea {
+  width: 100%;
+  height: calc(100% - 60px);
+  padding: 10px;
+  box-sizing: border-box;
+  border: 2px solid #586e75;
+  border-radius: 4px;
+  background-color: #073642;
+  color: #ffffff; /* Changed color to white for better visibility */
+  font-size: 16px;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+.output-area {
+  border-left: 2px solid #586e75;
+}
+
+.error {
+  color: #dc322f;
+  background-color: #073642;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #268bd2;
+  color: #fdf6e3; /* Kept the color as-is, but feel free to adjust if needed */
+  font-size: 16px;
+  cursor: pointer;
+  border: 2px solid #586e75;
+}
+
+button:hover {
+  background-color: #2aa198;
+}
+
+.json-tree-view {
+  padding-left: 20px;
+}
+
+.json-item {
+  margin-bottom: 10px;
+}
+
+.json-key {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.json-value {
+  padding: 5px;
+  border: 2px solid #586e75;
+  border-radius: 4px;
+  background-color: #073642;
+  color: #93a1a1;
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import ReactJson from "react-json-view";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import JsonTreeView from "./JsonTreeView";
 
 const JsonEditor: React.FC = () => {
   const [rawJson, setRawJson] = useState("");
@@ -49,10 +49,7 @@ const JsonEditor: React.FC = () => {
             Invalid JSON - Please fix the errors in the left panel to proceed.
           </div>
         ) : (
-          <ReactJson
-            src={parsedJson || {}}
-            onEdit={(edit) => handleJsonChange(edit.updated_src)}
-          />
+          <JsonTreeView data={parsedJson || {}} onChange={handleJsonChange} />
         )}
       </div>
     </div>
