@@ -75,8 +75,15 @@ button:hover {
   border-radius: 4px;
   background-color: #073642;
   color: #93a1a1;
-  width: calc(
-    100% - 10px
-  ); /* Make the input fields take up the full width of their container */
-  box-sizing: border-box; /* Ensure padding and border are included in the element's dimensions */
+  min-height: 1.5em; /* Set a minimum height */
+  width: calc(100% - 10px);
+  box-sizing: border-box;
+  word-wrap: break-word; /* Ensure text wraps to the next line */
+  overflow-wrap: break-word; /* Ensure text wraps to the next line */
+  white-space: pre-wrap; /* Preserve white space and new lines */
+  outline: none; /* Remove outline */
+}
+
+.json-value:focus {
+  border-color: #268bd2; /* Change border color on focus */
 }
