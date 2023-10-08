@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import ReactJson from 'react-json-view';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import React, { useState, useEffect, useRef } from "react";
+import ReactJson from "react-json-view";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const JsonEditor: React.FC = () => {
-  const [rawJson, setRawJson] = useState('');
-  const [parsedJson, setParsedJson] = useState<Record<string, any> | null>(null);
+  const [rawJson, setRawJson] = useState("");
+  const [parsedJson, setParsedJson] = useState<Record<string, any> | null>(
+    null
+  );
   const [error, setError] = useState<string | null>(null);
 
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -19,7 +21,7 @@ const JsonEditor: React.FC = () => {
       setParsedJson(JSON.parse(e.target.value));
       setError(null);
     } catch (err) {
-      setError('Invalid JSON');
+      setError("Invalid JSON");
     }
   };
 
@@ -37,17 +39,22 @@ const JsonEditor: React.FC = () => {
           onChange={handleInputChange}
           placeholder="Paste raw JSON here..."
         ></textarea>
+        <CopyToClipboard text={rawJson}>
+          <button>Copy to Clipboard</button>
+        </CopyToClipboard>
       </div>
       <div className="output-area">
         {error ? (
-          <div className="error">Invalid JSON - Please fix the errors in the left panel to proceed.</div>
+          <div className="error">
+            Invalid JSON - Please fix the errors in the left panel to proceed.
+          </div>
         ) : (
-          <ReactJson src={parsedJson || {}} onEdit={(edit) => handleJsonChange(edit.updated_src)} />
+          <ReactJson
+            src={parsedJson || {}}
+            onEdit={(edit) => handleJsonChange(edit.updated_src)}
+          />
         )}
       </div>
-      <CopyToClipboard text={rawJson}>
-        <button>Copy to Clipboard</button>
-      </CopyToClipboard>
     </div>
   );
 };
