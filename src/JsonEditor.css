@@ -2,7 +2,7 @@
     display: flex;
     height: 100vh;
     background-color: #002b36;
-    color: #839496;
+    color: #ffffff; /* Changed color to white for better visibility */
     font-family: 'Courier New', Courier, monospace;
   }
   
@@ -15,23 +15,27 @@
   
   .input-area textarea {
     width: 100%;
-    height: calc(100% - 40px);
+    height: calc(100% - 60px);
     padding: 10px;
     box-sizing: border-box;
-    border: none;
+    border: 2px solid #586e75;
     border-radius: 4px;
     background-color: #073642;
-    color: #839496;
+    color: #ffffff; /* Changed color to white for better visibility */
     font-size: 16px;
     resize: none;
+    margin-bottom: 10px;
   }
   
   .output-area {
-    border-left: 1px solid #073642;
+    border-left: 2px solid #586e75;
   }
   
   .error {
     color: #dc322f;
+    background-color: #073642;
+    padding: 10px;
+    border-radius: 4px;
   }
   
   button {
@@ -40,9 +44,10 @@
     border: none;
     border-radius: 4px;
     background-color: #268bd2;
-    color: #fdf6e3;
+    color: #fdf6e3; /* Kept the color as-is, but feel free to adjust if needed */
     font-size: 16px;
     cursor: pointer;
+    border: 2px solid #586e75;
   }
   
   button:hover {
