@@ -18,7 +18,9 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
     <div className="json-tree-view">
       {Object.keys(localData).map((key) => (
         <div className="json-item" key={key}>
-          <div className="json-key">{key}:</div>
+          <div className="json-key">
+            {key} <span className="arrow">{">"}</span>
+          </div>
           {typeof localData[key] === "object" && localData[key] !== null ? (
             <div className="json-nested">
               <JsonTreeView
@@ -27,15 +29,19 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
               />
             </div>
           ) : (
-            <div
-              className="json-value"
-              contentEditable
-              suppressContentEditableWarning
-              onBlur={(e) =>
-                handleValueChange(key, e.currentTarget.textContent || "")
-              }
-            >
-              {localData[key]}
+            <div className="json-value-container">
+              {" "}
+              {/* New container div */}
+              <div
+                className="json-value"
+                contentEditable
+                suppressContentEditableWarning
+                onBlur={(e) =>
+                  handleValueChange(key, e.currentTarget.textContent || "")
+                }
+              >
+                {localData[key]}
+              </div>
             </div>
           )}
         </div>

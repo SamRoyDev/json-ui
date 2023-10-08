@@ -61,41 +61,61 @@ button:hover {
 }
 
 .json-item {
-  margin-bottom: 10px;
-  display: flex; /* Change to flex layout */
-  align-items: flex-start; /* Align items to the top */
-}
-
-.json-key {
-  font-weight: bold;
-  margin-right: 5px;
-  flex-shrink: 0; /* Prevent shrinking */
-}
-
-.json-nested {
-  margin-left: 20px; /* Add indentation for nested objects */
-}
+    margin-bottom: 5px;
+    flex-direction: column;  /* Change to column layout */
+    align-items: flex-start;  /* Align items to the left */
+  }
 
 .output-area {
   text-align: left; /* Left-justify the right-side editor */
 }
 
 .json-value {
-  padding: 5px;
-  border: 2px solid #586e75;
-  border-radius: 4px;
-  background-color: #073642;
-  color: #ffffff;
-  min-height: 1.5em; /* Set a minimum height */
-  width: calc(100% - 10px);
-  box-sizing: border-box;
-  word-wrap: break-word; /* Ensure text wraps to the next line */
-  overflow-wrap: break-word; /* Ensure text wraps to the next line */
-  white-space: pre-wrap; /* Preserve white space and new lines */
-  outline: none; /* Remove outline */
-  flex-grow: 1; /* Allow growing to take up available space */
+    padding: 5px;
+    border: 2px solid #586e75;
+    border-radius: 4px;
+    background-color: #073642;
+    color: #ffffff;
+    min-height: 1.5em;
+    width: 100%;  /* Set width to 100% to take up all available space */
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    outline: none;
+    line-height: 1.2;
+    max-width: 100%;  /* Ensure text box does not extend beyond container */
+    overflow-y: auto;  /* Allow vertical scrolling when content overflows */
+    resize: vertical;  /* Allow vertical resizing */
 }
 
 .json-value:focus {
   border-color: #268bd2; /* Change border color on focus */
 }
+
+.arrow {
+  color: #268bd2;
+  margin: 0 5px;
+  font-weight: bold;
+}
+
+.json-key {
+  font-weight: bold;
+  margin-right: 5px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  line-height: 1.2; /* Reduced line height */
+}
+
+.json-nested {
+  margin-left: 10px;
+  border-left: 2px solid #586e75;
+  padding-left: 5px; /* Reduced padding */
+}
+
+.json-value-container {
+    align-self: stretch;  /* Stretch container to take up full width */
+    margin-left: 10px;  /* Optional: Add some margin for aesthetic spacing */
+    width: calc(100% - 10px);  /* Adjust width to account for margin */
+  }
