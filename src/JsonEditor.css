@@ -1,9 +1,10 @@
 .json-editor {
   display: flex;
-  height: 100vh;
+  height: 100%;
   background-color: #002b36;
-  color: #ffffff; /* Changed color to white for better visibility */
+  color: #ffffff;
   font-family: "Courier New", Courier, monospace;
+  overflow: hidden; /* Disable overflow on the json-editor element */
 }
 
 .input-area,
@@ -11,6 +12,7 @@
   flex: 1;
   padding: 20px;
   box-sizing: border-box;
+  overflow: auto; /* Enable scrolling within these areas */
 }
 
 .input-area textarea {
@@ -73,4 +75,8 @@ button:hover {
   border-radius: 4px;
   background-color: #073642;
   color: #93a1a1;
+  width: calc(
+    100% - 10px
+  ); /* Make the input fields take up the full width of their container */
+  box-sizing: border-box; /* Ensure padding and border are included in the element's dimensions */
 }

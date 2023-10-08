@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface JsonTreeViewProps {
   data: Record<string, any>;
@@ -16,17 +16,25 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
 
   return (
     <div className="json-tree-view">
-      {Object.keys(localData).map(key => (
+      {Object.keys(localData).map((key) => (
         <div className="json-item" key={key}>
           <div className="json-key">{key}:</div>
-          {typeof localData[key] === 'object' && localData[key] !== null ? (
-            <JsonTreeView data={localData[key]} onChange={(updatedData) => handleValueChange(key, updatedData)} />
-          ) : (
-            <input
-              className="json-value"
-              value={localData[key]}
-              onChange={(e) => handleValueChange(key, e.target.value)}
+          {typeof localData[key] === "object" && localData[key] !== null ? (
+            <JsonTreeView
+              data={localData[key]}
+              onChange={(updatedData) => handleValueChange(key, updatedData)}
             />
+          ) : (
+            <div
+              className="json-value"
+              contentEditable
+              suppressContentEditableWarning
+              onBlur={(e) =>
+                handleValueChange(key, e.currentTarget.textContent || "")
+              }
+            >
+              {localData[key]}
+            </div>
           )}
         </div>
       ))}

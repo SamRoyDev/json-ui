@@ -38,6 +38,7 @@ const JsonEditor: React.FC = () => {
           value={rawJson}
           onChange={handleInputChange}
           placeholder="Paste raw JSON here..."
+          style={{ whiteSpace: 'pre-wrap' }}  /* Ensure text wraps to the next line */
         ></textarea>
         <CopyToClipboard text={rawJson}>
           <button>Copy to Clipboard</button>
