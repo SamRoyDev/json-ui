@@ -1,0 +1,19 @@
+.json-editor {
+    display: flex;
+    height: 100vh;
+  }
+  .input-area,
+  .output-area {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .input-area textarea {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .error {
+    color: red;
+  }
+  
