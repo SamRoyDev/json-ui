@@ -14,6 +14,41 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
     onChange(updatedData);
   };
 
+  const renderValueField = (key: string, value: any) => {
+    switch (typeof value) {
+      case "string":
+        return (
+          <textarea
+            className="json-value"
+            value={value}
+            onChange={(e) => handleValueChange(key, e.target.value)}
+          />
+        );
+      case "number":
+        return (
+          <input
+            className="json-value"
+            type="number"
+            value={value}
+            onChange={(e) => handleValueChange(key, parseFloat(e.target.value))}
+          />
+        );
+      case "boolean":
+        return (
+          <select
+            className="json-value"
+            value={value ? "true" : "false"}
+            onChange={(e) => handleValueChange(key, e.target.value === "true")}
+          >
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="json-tree-view">
       {Object.keys(localData).map((key) => (
@@ -30,18 +65,7 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
             </div>
           ) : (
             <div className="json-value-container">
-              {" "}
-              {/* New container div */}
-              <div
-                className="json-value"
-                contentEditable
-                suppressContentEditableWarning
-                onBlur={(e) =>
-                  handleValueChange(key, e.currentTarget.textContent || "")
-                }
-              >
-                {localData[key]}
-              </div>
+              {renderValueField(key, localData[key])}
             </div>
           )}
         </div>

@@ -61,32 +61,44 @@ button:hover {
 }
 
 .json-item {
-    margin-bottom: 5px;
-    flex-direction: column;  /* Change to column layout */
-    align-items: flex-start;  /* Align items to the left */
-  }
+  margin-bottom: 5px;
+  flex-direction: column; /* Change to column layout */
+  align-items: flex-start; /* Align items to the left */
+}
 
 .output-area {
   text-align: left; /* Left-justify the right-side editor */
 }
 
 .json-value {
-    padding: 5px;
-    border: 2px solid #586e75;
-    border-radius: 4px;
-    background-color: #073642;
-    color: #ffffff;
-    min-height: 1.5em;
-    width: 100%;  /* Set width to 100% to take up all available space */
-    box-sizing: border-box;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
-    outline: none;
-    line-height: 1.2;
-    max-width: 100%;  /* Ensure text box does not extend beyond container */
-    overflow-y: auto;  /* Allow vertical scrolling when content overflows */
-    resize: vertical;  /* Allow vertical resizing */
+  padding: 5px;
+  border: 2px solid #586e75;
+  border-radius: 4px;
+  height: 100%;
+  background-color: #073642;
+  color: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  resize: vertical;
+  flex-direction: column;
+}
+
+.json-value > input,
+.json-value > select {
+  width: 100%;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  outline: none;
+  border: none;
+  background: none;
+  color: #93a1a1;
+  font-size: inherit;
+  font-family: inherit;
+  resize: vertical;
+  overflow-y: auto;
 }
 
 .json-value:focus {
@@ -115,7 +127,7 @@ button:hover {
 }
 
 .json-value-container {
-    align-self: stretch;  /* Stretch container to take up full width */
-    margin-left: 10px;  /* Optional: Add some margin for aesthetic spacing */
-    width: calc(100% - 10px);  /* Adjust width to account for margin */
-  }
+  align-self: stretch; /* Stretch container to take up full width */
+  margin-left: 10px; /* Optional: Add some margin for aesthetic spacing */
+  width: calc(100% - 10px); /* Adjust width to account for margin */
+}
