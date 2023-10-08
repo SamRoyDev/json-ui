@@ -62,11 +62,22 @@ button:hover {
 
 .json-item {
   margin-bottom: 10px;
+  display: flex; /* Change to flex layout */
+  align-items: flex-start; /* Align items to the top */
 }
 
 .json-key {
   font-weight: bold;
   margin-right: 5px;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.json-nested {
+  margin-left: 20px; /* Add indentation for nested objects */
+}
+
+.output-area {
+  text-align: left; /* Left-justify the right-side editor */
 }
 
 .json-value {
@@ -82,6 +93,7 @@ button:hover {
   overflow-wrap: break-word; /* Ensure text wraps to the next line */
   white-space: pre-wrap; /* Preserve white space and new lines */
   outline: none; /* Remove outline */
+  flex-grow: 1; /* Allow growing to take up available space */
 }
 
 .json-value:focus {

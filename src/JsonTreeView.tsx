@@ -20,10 +20,12 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
         <div className="json-item" key={key}>
           <div className="json-key">{key}:</div>
           {typeof localData[key] === "object" && localData[key] !== null ? (
-            <JsonTreeView
-              data={localData[key]}
-              onChange={(updatedData) => handleValueChange(key, updatedData)}
-            />
+            <div className="json-nested">
+              <JsonTreeView
+                data={localData[key]}
+                onChange={(updatedData) => handleValueChange(key, updatedData)}
+              />
+            </div>
           ) : (
             <div
               className="json-value"
