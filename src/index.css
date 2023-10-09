@@ -1,11 +1,14 @@
-body, html, #root, .App {
+body,
+html,
+#root,
+.App {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden;  /* Disable overflow on these elements */
+  overflow: hidden; /* Disable overflow on these elements */
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
