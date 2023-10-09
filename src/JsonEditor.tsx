@@ -15,10 +15,17 @@ const JsonEditor: React.FC = () => {
     textAreaRef.current?.focus();
   }, []);
 
+  useEffect(() => {
+    parseJson(rawJson); // Ensure parseJson is called with rawJson
+  }, [rawJson]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setRawJson(e.target.value);
+  };
+
+  const parseJson = (jsonString: string) => {
     try {
-      setParsedJson(JSON.parse(e.target.value));
+      setParsedJson(JSON.parse(jsonString));
       setError(null);
     } catch (err) {
       setError("Invalid JSON");
@@ -38,7 +45,9 @@ const JsonEditor: React.FC = () => {
           value={rawJson}
           onChange={handleInputChange}
           placeholder="Paste raw JSON here..."
-          style={{ whiteSpace: 'pre-wrap' }}  /* Ensure text wraps to the next line */
+          style={{
+            whiteSpace: "pre-wrap",
+          }} /* Ensure text wraps to the next line */
         ></textarea>
         <CopyToClipboard text={rawJson}>
           <button>Copy to Clipboard</button>

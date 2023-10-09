@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface JsonTreeViewProps {
   data: Record<string, any>;
@@ -7,6 +7,10 @@ interface JsonTreeViewProps {
 
 const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
   const [localData, setLocalData] = useState(data);
+
+  useEffect(() => {
+    setLocalData(data); // Update localData whenever data prop changes
+  }, [data]);
 
   const handleValueChange = (key: string, value: any) => {
     const updatedData = { ...localData, [key]: value };
