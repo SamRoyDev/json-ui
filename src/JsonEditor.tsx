@@ -4,8 +4,9 @@ import JsonTreeView from "./JsonTreeView";
 
 const JsonEditor: React.FC = () => {
   const [rawJson, setRawJson] = useState("");
-  const [parsedJson, setParsedJson] = useState<any | null>(null);
-
+  const [parsedJson, setParsedJson] = useState<Record<string, any> | null>(
+    null
+  );
   const [error, setError] = useState<string | null>(null);
 
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -14,17 +15,17 @@ const JsonEditor: React.FC = () => {
     textAreaRef.current?.focus();
   }, []);
 
-  useEffect(() => {
-    parseJson(rawJson); // Ensure parseJson is called with rawJson
-  }, [rawJson]);
-
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setRawJson(e.target.value);
+    formatJson(e.target.value);
   };
 
-  const parseJson = (jsonString: string) => {
+  const formatJson = (jsonString: string) => {
     try {
-      setParsedJson(JSON.parse(jsonString));
+      const parsed = JSON.parse(jsonString);
+      const formattedJson = JSON.stringify(parsed, null, 2);
+      setRawJson(formattedJson);
+      setParsedJson(parsed);
       setError(null);
     } catch (err) {
       setError("Invalid JSON");
