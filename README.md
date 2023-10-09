@@ -46,7 +46,6 @@ To build the application for production:
 
 ```
 npm run build
-
 ```
 
 This will create a build directory with the production-ready application.
