@@ -4,9 +4,8 @@ import JsonTreeView from "./JsonTreeView";
 
 const JsonEditor: React.FC = () => {
   const [rawJson, setRawJson] = useState("");
-  const [parsedJson, setParsedJson] = useState<Record<string, any> | null>(
-    null
-  );
+  const [parsedJson, setParsedJson] = useState<any | null>(null);
+
   const [error, setError] = useState<string | null>(null);
 
   const textAreaRef = useRef<HTMLTextAreaElement>(null);

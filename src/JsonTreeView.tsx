@@ -12,10 +12,19 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
     setLocalData(data); // Update localData whenever data prop changes
   }, [data]);
 
-  const handleValueChange = (key: string, value: any) => {
-    const updatedData = { ...localData, [key]: value };
-    setLocalData(updatedData);
-    onChange(updatedData);
+  const handleValueChange = (key: string | number, value: any) => {
+    if (Array.isArray(localData)) {
+      // If localData is an array, create a new array with the updated value
+      const updatedData = [...localData];
+      updatedData[key as number] = value;
+      setLocalData(updatedData);
+      onChange(updatedData);
+    } else {
+      // If localData is an object, create a new object with the updated value
+      const updatedData = { ...localData, [key]: value };
+      setLocalData(updatedData);
+      onChange(updatedData);
+    }
   };
 
   const renderValueField = (key: string, value: any) => {
