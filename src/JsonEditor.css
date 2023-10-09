@@ -169,3 +169,14 @@ button:hover {
 .array-item-container > button:hover {
   background-color: #2aa198;
 }
+
+.minimize-expand-button {
+  font-size: 12px; /* Adjust as needed */
+  padding: 2px 5px; /* Adjust as needed */
+  margin: 5px; /* Space between the key and the button */
+  border: 1px solid #586e75;
+  border-radius: 3px;
+  background-color: #268bd2;
+  color: #fdf6e3;
+  cursor: pointer;
+}

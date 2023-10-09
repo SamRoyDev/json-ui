@@ -8,10 +8,16 @@ interface JsonTreeViewProps {
 
 const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
   const [localData, setLocalData] = useState(data);
-  const [previewHtmlKey, setPreviewHtmlKey] = useState<string | null>(null); // State to track which key's HTML is being previewed
+  const [expandedKeys, setExpandedKeys] = useState<Record<string, boolean>>({});
+  const [previewHtmlKey, setPreviewHtmlKey] = useState<string | null>(null);
 
   useEffect(() => {
-    setLocalData(data); // Update localData whenever data prop changes
+    setLocalData(data);
+    const newExpandedKeys: Record<string, boolean> = {};
+    Object.keys(data).forEach((key) => {
+      newExpandedKeys[key] = true;
+    });
+    setExpandedKeys(newExpandedKeys);
   }, [data]);
 
   const handleValueChange = (key: string | number, value: any) => {
@@ -45,6 +51,10 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
 
   const formatLabel = (key: string) => {
     return "Add " + key.charAt(0).toUpperCase() + key.slice(1) + " Item";
+  };
+
+  const toggleExpandItem = (key: string) => {
+    setExpandedKeys((prevKeys) => ({ ...prevKeys, [key]: !prevKeys[key] }));
   };
 
   const getNewItem = (array: any[]) => {
@@ -152,70 +162,76 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
     <div className="json-tree-view">
       {Object.keys(localData).map((key) => (
         <div className="json-item" key={key}>
-          <div className="json-key">
-            {key} <span className="arrow">{">"}</span>
+          <div className="json-key" onClick={() => toggleExpandItem(key)}>
+            {key}
+            <span className="arrow">{expandedKeys[key] ? "v" : ">"}</span>
           </div>
-          {typeof localData[key] === "object" &&
-          !Array.isArray(localData[key]) &&
-          localData[key] !== null ? (
-            <div className="json-nested">
-              <JsonTreeView
-                data={localData[key]}
-                onChange={(updatedData) => handleValueChange(key, updatedData)}
-              />
-            </div>
-          ) : Array.isArray(localData[key]) ? (
-            <div className="json-array">
-              {localData[key].map((item: any, index: number) => (
-                <div className="array-item-container" key={index}>
-                  {typeof item === "string" ? (
-                    <>
-                      <textarea
-                        className="json-value"
-                        value={item}
-                        onChange={(e) =>
-                          handleArrayItemChange(key, index, e.target.value)
-                        }
-                      />
-                      <button
-                        className="item-button"
-                        onClick={() => handleRemoveItem(key, index)}
-                      >
-                        Remove
-                      </button>
-                    </>
-                  ) : (
-                    <div className="nested-array-item">
-                      <JsonTreeView
-                        data={item}
-                        onChange={(updatedData) =>
-                          handleArrayItemChange(key, index, updatedData)
-                        }
-                      />
-                      <button
-                        className="item-button"
-                        onClick={() => handleRemoveItem(key, index)}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  )}
-                </div>
-              ))}
-              <div className="array-item-container">
-                <button
-                  className="item-button"
-                  onClick={() => handleAddItem(key)}
-                >
-                  {formatLabel(key)}
-                </button>
+          <div className="json-item-content">
+            {typeof localData[key] === "object" &&
+            !Array.isArray(localData[key]) &&
+            localData[key] !== null ? (
+              <div className="json-nested">
+                <JsonTreeView
+                  data={localData[key]}
+                  onChange={(updatedData) =>
+                    handleValueChange(key, updatedData)
+                  }
+                />
               </div>
-            </div>
-          ) : (
-            <div className="json-value-container">
-              {renderValueField(key, localData[key])}
-            </div>
-          )}
+            ) : Array.isArray(localData[key]) ? (
+              <div className="json-array">
+                {localData[key].map((item: any, index: number) => (
+                  <div className="array-item-container" key={index}>
+                    {expandedKeys[key] &&
+                      (typeof item === "string" ? (
+                        <>
+                          <textarea
+                            className="json-value"
+                            value={item}
+                            onChange={(e) =>
+                              handleArrayItemChange(key, index, e.target.value)
+                            }
+                          />
+                          <button
+                            className="item-button"
+                            onClick={() => handleRemoveItem(key, index)}
+                          >
+                            Remove
+                          </button>
+                        </>
+                      ) : (
+                        <div className="nested-array-item">
+                          <JsonTreeView
+                            data={item}
+                            onChange={(updatedData) =>
+                              handleArrayItemChange(key, index, updatedData)
+                            }
+                          />
+                          <button
+                            className="item-button"
+                            onClick={() => handleRemoveItem(key, index)}
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      ))}
+                  </div>
+                ))}
+                <div className="array-item-container">
+                  <button
+                    className="item-button"
+                    onClick={() => handleAddItem(key)}
+                  >
+                    {formatLabel(key)}
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="json-value-container">
+                {renderValueField(key, localData[key])}
+              </div>
+            )}
+          </div>
         </div>
       ))}
     </div>
