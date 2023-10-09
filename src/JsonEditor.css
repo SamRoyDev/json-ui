@@ -79,20 +79,19 @@ button:hover {
   padding: 5px;
   border: 2px solid #586e75;
   border-radius: 4px;
-  height: 100%;
   background-color: #073642;
   color: #ffffff;
   width: 100%;
   box-sizing: border-box;
-  display: flex;
-  resize: vertical;
-  flex-direction: column;
-  flex-grow: 1;
-  margin-right: 10px; /* Adjust this value to add spacing between the text area and the button */
+  height: auto;
+  margin-right: 5px; /* Adjust this value to add spacing between the text area and the button */
+  overflow-y: hidden; /* Adds scroll if content exceeds 50px */
 }
 
 .json-value > input,
-.json-value > select {
+.json-value > select,
+.json-value > textarea {
+  /* Added textarea selector */
   width: 100%;
   box-sizing: border-box;
   word-wrap: break-word;
@@ -104,7 +103,7 @@ button:hover {
   color: #93a1a1;
   font-size: inherit;
   font-family: inherit;
-  resize: vertical;
+  resize: none; /* Disables resizing */
   overflow-y: auto;
 }
 
@@ -152,22 +151,17 @@ button:hover {
 
 .array-item-container > button {
   max-width: 10%;
-  width: auto; /* This sets a specific width for the button */
-  margin-right: 10px; /* This adds some margin to the right of the button */
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
-  padding: 10px 20px;
+  margin: 5px;
+  padding: 5px 5px;
   border: none;
-  border-radius: 4px;
+  border-radius: 15px;
   background-color: #268bd2;
   color: #fdf6e3; /* Kept the color as-is, but feel free to adjust if needed */
-  font-size: 16px;
   cursor: pointer;
   border: 2px solid #586e75;
-  width: 80px; /* Set a specific width for the button */
-  height: 40px; /* Optional: Set a specific height for the button */
 }
 
 .array-item-container > button:hover {
