@@ -17,15 +17,21 @@ const JsonEditor: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setRawJson(e.target.value);
-    formatJson(e.target.value);
+    try {
+      const parsed = JSON.parse(e.target.value);
+      setParsedJson(parsed);
+      setError(null);
+    } catch (err) {
+      setError("Invalid JSON");
+    }
   };
 
-  const formatJson = (jsonString: string) => {
+  const handleFormatClick = () => {
     try {
-      const parsed = JSON.parse(jsonString);
-      const formattedJson = JSON.stringify(parsed, null, 2);
-      setRawJson(formattedJson);
-      setParsedJson(parsed);
+      const parsed = JSON.parse(rawJson); // Re-parse the raw JSON
+      const formattedJson = JSON.stringify(parsed, null, 2); // Format the parsed JSON
+      setRawJson(formattedJson); // Update the raw JSON state
+      setParsedJson(parsed); // Update the parsed JSON state
       setError(null);
     } catch (err) {
       setError("Invalid JSON");
@@ -34,7 +40,7 @@ const JsonEditor: React.FC = () => {
 
   const handleJsonChange = (updatedJson: Record<string, any>) => {
     setParsedJson(updatedJson);
-    setRawJson(JSON.stringify(updatedJson, null, 2));
+    setRawJson(JSON.stringify(updatedJson, null, 2)); // Updated line to maintain formatting
   };
 
   return (
@@ -52,6 +58,8 @@ const JsonEditor: React.FC = () => {
         <CopyToClipboard text={rawJson}>
           <button>Copy to Clipboard</button>
         </CopyToClipboard>
+        <button onClick={handleFormatClick}>Format JSON</button>{" "}
+        {/* New Format JSON button */}
       </div>
       <div className="output-area">
         {error ? (
