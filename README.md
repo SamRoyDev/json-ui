@@ -26,3 +26,38 @@ A versatile editor built with React and TypeScript to edit and visualize JSON da
    cd json-ui
    ```
 1. Install dependancies:
+   ```
+   npm install
+   ```
+
+### Running the Application
+
+To start the development server and run the application:
+
+```
+npm start
+```
+
+Open http://localhost:3000 to view it in the browser.
+
+### Building the Application
+
+To build the application for production:
+
+```
+npm run build
+
+```
+
+This will create a build directory with the production-ready application.
+
+## Packages Used
+
+- React
+- TypeScript
+- react-copy-to-clipboard
+- react-html-parser
+
+## Contributing
+
+I welcome contributions! Please create an issue or submit a pull request on GitHub.
