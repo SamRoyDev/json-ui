@@ -43,8 +43,39 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
     }
   };
 
+  const getNewItem = (array: any[]) => {
+    if (array.length === 0) return {};
+    const firstItem = array[0];
+    if (typeof firstItem !== "object") return ""; // Assuming string as a default type
+    const newItem: Record<string, any> = {};
+    Object.keys(firstItem).forEach((key) => {
+      const value = firstItem[key];
+      switch (typeof value) {
+        case "string":
+          newItem[key] = "";
+          break;
+        case "number":
+          newItem[key] = 0;
+          break;
+        case "boolean":
+          newItem[key] = false;
+          break;
+        case "object":
+          // If it's an array, initialize with an empty array
+          // Otherwise, initialize with an empty object
+          newItem[key] = Array.isArray(value) ? [] : {};
+          break;
+        default:
+          newItem[key] = null;
+          break;
+      }
+    });
+    return newItem;
+  };
+
   const handleAddItem = (key: string) => {
-    const updatedData = { ...localData, [key]: [...localData[key], {}] };
+    const newItem = getNewItem(localData[key]);
+    const updatedData = { ...localData, [key]: [...localData[key], newItem] };
     setLocalData(updatedData);
     onChange(updatedData);
   };
@@ -131,14 +162,6 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
             </div>
           ) : Array.isArray(localData[key]) ? (
             <div className="json-array">
-              <div className="array-item-container">
-                <button
-                  className="item-button"
-                  onClick={() => handleAddItem(key)}
-                >
-                  Add Item
-                </button>
-              </div>
               {localData[key].map((item: any, index: number) => (
                 <div className="array-item-container" key={index}>
                   {typeof item === "string" ? (
@@ -175,6 +198,14 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
                   )}
                 </div>
               ))}
+              <div className="array-item-container">
+                <button
+                  className="item-button"
+                  onClick={() => handleAddItem(key)}
+                >
+                  Add Item
+                </button>
+              </div>
             </div>
           ) : (
             <div className="json-value-container">
