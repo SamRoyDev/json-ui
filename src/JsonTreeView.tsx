@@ -46,7 +46,11 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
               onChange={(e) => handleValueChange(key, e.target.value)}
             />
             {isHtml && (
-              <button onClick={() => setPreviewHtmlKey(key)}>
+              <button
+                onClick={() =>
+                  setPreviewHtmlKey((prevKey) => (prevKey === key ? null : key))
+                }
+              >
                 Preview HTML
               </button>
             )}
