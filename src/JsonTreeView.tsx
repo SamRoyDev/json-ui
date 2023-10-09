@@ -43,6 +43,10 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
     }
   };
 
+  const formatLabel = (key: string) => {
+    return "Add " + key.charAt(0).toUpperCase() + key.slice(1) + " Item";
+  };
+
   const getNewItem = (array: any[]) => {
     if (array.length === 0) return {};
     const firstItem = array[0];
@@ -203,7 +207,7 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
                   className="item-button"
                   onClick={() => handleAddItem(key)}
                 >
-                  Add Item
+                  {formatLabel(key)}
                 </button>
               </div>
             </div>

@@ -150,12 +150,14 @@ button:hover {
 }
 
 .array-item-container > button {
-  max-width: 10%;
-  display: flex;
+  white-space: nowrap; /* Prevent text from wrapping to the next line */
+  display: inline-flex; /* Use inline-flex to keep button width to content */
+  box-sizing: border-box;
+  max-width: min-content;
   justify-content: center;
   align-items: center;
   margin: 5px;
-  padding: 5px 5px;
+  padding: 5px; /* Adjusted padding to ensure there's space around text */
   border: none;
   border-radius: 15px;
   background-color: #268bd2;
