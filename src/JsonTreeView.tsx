@@ -131,26 +131,47 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
             </div>
           ) : Array.isArray(localData[key]) ? (
             <div className="json-array">
-              <button onClick={() => handleAddItem(key)}>Add Item</button>
+              <div className="array-item-container">
+                <button
+                  className="item-button"
+                  onClick={() => handleAddItem(key)}
+                >
+                  Add Item
+                </button>
+              </div>
               {localData[key].map((item: any, index: number) => (
-                <div key={index}>
-                  <button onClick={() => handleRemoveItem(key, index)}>
-                    Remove
-                  </button>
+                <div className="array-item-container" key={index}>
                   {typeof item === "string" ? (
-                    <textarea
-                      value={item}
-                      onChange={(e) =>
-                        handleArrayItemChange(key, index, e.target.value)
-                      }
-                    />
+                    <>
+                      <textarea
+                        className="json-value"
+                        value={item}
+                        onChange={(e) =>
+                          handleArrayItemChange(key, index, e.target.value)
+                        }
+                      />
+                      <button
+                        className="item-button"
+                        onClick={() => handleRemoveItem(key, index)}
+                      >
+                        Remove
+                      </button>
+                    </>
                   ) : (
-                    <JsonTreeView
-                      data={item}
-                      onChange={(updatedData) =>
-                        handleArrayItemChange(key, index, updatedData)
-                      }
-                    />
+                    <div className="nested-array-item">
+                      <JsonTreeView
+                        data={item}
+                        onChange={(updatedData) =>
+                          handleArrayItemChange(key, index, updatedData)
+                        }
+                      />
+                      <button
+                        className="item-button"
+                        onClick={() => handleRemoveItem(key, index)}
+                      >
+                        Remove
+                      </button>
+                    </div>
                   )}
                 </div>
               ))}

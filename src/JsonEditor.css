@@ -1,5 +1,6 @@
 .json-editor {
   display: flex;
+  flex-direction: row; /* or column, depending on your layout */
   height: 100%;
   background-color: #002b36;
   color: #ffffff;
@@ -58,6 +59,8 @@ button:hover {
 
 .json-tree-view {
   padding-left: 20px;
+  width: 100%;
+  flex-grow: 1;
 }
 
 .json-item {
@@ -68,6 +71,8 @@ button:hover {
 
 .output-area {
   text-align: left; /* Left-justify the right-side editor */
+  display: flex;
+  flex-direction: column;
 }
 
 .json-value {
@@ -82,6 +87,8 @@ button:hover {
   display: flex;
   resize: vertical;
   flex-direction: column;
+  flex-grow: 1;
+  margin-right: 10px; /* Adjust this value to add spacing between the text area and the button */
 }
 
 .json-value > input,
@@ -130,4 +137,39 @@ button:hover {
   align-self: stretch; /* Stretch container to take up full width */
   margin-left: 10px; /* Optional: Add some margin for aesthetic spacing */
   width: calc(100% - 10px); /* Adjust width to account for margin */
+}
+
+.array-item-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.array-item-container > * {
+  max-width: calc(100% - 50px); /* Adjust this value to control the max width */
+  flex: 1; /* This will allow the elements to grow but not beyond the max-width */
+}
+
+.array-item-container > button {
+  max-width: 10%;
+  width: auto; /* This sets a specific width for the button */
+  margin-right: 10px; /* This adds some margin to the right of the button */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #268bd2;
+  color: #fdf6e3; /* Kept the color as-is, but feel free to adjust if needed */
+  font-size: 16px;
+  cursor: pointer;
+  border: 2px solid #586e75;
+  width: 80px; /* Set a specific width for the button */
+  height: 40px; /* Optional: Set a specific height for the button */
+}
+
+.array-item-container > button:hover {
+  background-color: #2aa198;
 }
