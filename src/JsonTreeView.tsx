@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactHtmlParser from "react-html-parser"; // Import ReactHtmlParser
 
 interface JsonTreeViewProps {
   data: Record<string, any>;
@@ -7,6 +8,7 @@ interface JsonTreeViewProps {
 
 const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
   const [localData, setLocalData] = useState(data);
+  const [previewHtmlKey, setPreviewHtmlKey] = useState<string | null>(null); // State to track which key's HTML is being previewed
 
   useEffect(() => {
     setLocalData(data); // Update localData whenever data prop changes
@@ -28,14 +30,30 @@ const JsonTreeView: React.FC<JsonTreeViewProps> = ({ data, onChange }) => {
   };
 
   const renderValueField = (key: string, value: any) => {
+    const isHtml =
+      value &&
+      typeof value === "string" &&
+      value.startsWith("<") &&
+      value.endsWith(">");
+
     switch (typeof value) {
       case "string":
         return (
-          <textarea
-            className="json-value"
-            value={value}
-            onChange={(e) => handleValueChange(key, e.target.value)}
-          />
+          <div className="value-field-container">
+            <textarea
+              className="json-value"
+              value={value}
+              onChange={(e) => handleValueChange(key, e.target.value)}
+            />
+            {isHtml && (
+              <button onClick={() => setPreviewHtmlKey(key)}>
+                Preview HTML
+              </button>
+            )}
+            {previewHtmlKey === key && (
+              <div className="html-preview">{ReactHtmlParser(value)}</div>
+            )}
+          </div>
         );
       case "number":
         return (
